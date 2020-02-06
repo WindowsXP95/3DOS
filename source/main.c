@@ -1,7 +1,7 @@
 // 8086tiny: a tiny, highly functional, highly portable PC emulator/VM
 // Copyright 2013-14, Adrian Cable (adrian.cable@gmail.com) - http://www.megalith.co.uk/8086tiny
 //
-// Revision 1.25
+// Revision 1.30
 //
 // This work is licensed under the MIT License. See included LICENSE.TXT.
 
@@ -100,8 +100,8 @@ int main(int argc, char **argv) {
     //*++argv;
     // printf(argv[2]);
     char **args[2];
-    args[1] = "bios";
-    args[2] = "fd.img";
+    args[1] = "bios.bin";
+    args[2] = "DOS.img";
     main2(2, args);
 }
 
@@ -146,8 +146,8 @@ int main2(int argc, char **argv) {
 
     // Open BIOS (file id disk[2]), floppy disk image (disk[1]), and hard disk image (disk[0]) if
     // specified
-    disk[2] = open("bios", 32898);
-    disk[1] = open("fd.img", 32898);
+    disk[2] = open("bios.bin", 32898);
+    disk[1] = open("DOS.img", 32898);
 
     // Set CX:AX equal to the hard disk image size, if present
     CAST(unsigned)regs16[REG_AX] = *disk ? lseek(*disk, 0, 2) >> 9 : 0;
